@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="sketch.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300i|Raleway:300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="header">
+	</div>
+
+	<div id="titlebox">
+
+	</div>
+	<div class="textwrapper">
+		<h1>Data bias in Image Translation: Using Biased Datasets with Pix2Pix</h1>
+		<p id="author">Hazel Darney</p>
+		<a href="files/HazelDarney_DSDN487_DataBiasInImageTranslation.pdf">PDF</a>
+		
+		<h2>Abstract</h2>
+		<p><i>As machine learning artificial intelligence applications become more widespread in use, the impacts of a biased dataset on user’s real-world experiences are increasingly becoming evident. Some studies on certain models have displayed an exacerbation of biases already present within the training dataset, an occurrence that could be potentially harmful to users of these models. This work investigates the potential for similar patterns of behaviour in image translation, specifically Pix2Pix by attempting to examine how this model responds to specific distributions of shape and colour, and relate this to biased real-world datasets. This research finds inconclusive evidence that Pix2Pix either reduces or exacerbates biases in the learned data, and indicates some next-step trials to be attempted in future.</i></p>
+
+		<h2>Introduction</h2>
+		
+		<p>This project investigates the way a biased dataset may affect the output of Pix2Pix [1] through abstractions of scenarios using shapes and colours. This project aims to create similar experiments to those by Zhao, Ren, Yuan, Song, Goodman, & Ermon in the paper Bias and Generalisation in Deep Generative Models: An Empirical Study (2018) [4], using image translation with Pix2Pix. The intent is that these findings may eventually be used to predict the outcomes to real-life scenarios of biases in potential machine learning applications, and to examine whether Pix2Pix reduces, reinforces or exacerbates biases present in the dataset.   </p>
+
+		<h2>Related Work</h2>
+		
+		<p>This concept was based on the work of Zhao, Ren, Yuan, Song, Goodman, & Ermon in the paper Bias and Generalisation in Deep Generative Models: An Empirical Study (2018) [4], which explores whether certain models generalise, and also what they generate in response to biased datasets containing a specific number of shapes (E.g., a dataset of images containing just one randomly placed circle generates single circles, vs a dataset of images with 6 circles generates varying numbers of circles distributed around the 6 mark, with a bias to over-estimate). Another paper informing this project is by Zhao, J., Wang, T., Yatskar, M., Ordonez, V., & Chang, K.-W, called Men Also Like Shopping: Reducing Gender Bias Amplification using Corpus-level Constraints (2017) [5], which found that training on MS-COCO for multi-label object classification amplified bias from an already gender-biased dataset.</p>
+
+		<h2>Experiments</h2>
+
+		<h4 class="subheading">Methods</h4>
+		
+		<p>Datasets were comprised of images of  10 two-dimensional shapes (either circles and/or squares) in either blue or orange. Each experiment followed different rules for the distributions of the shapes and colours. A focus was put on the distributions of 50/50 and 70/30. </p>
+
+		<p>These datasets were generated using P5.js scripts to automate the process, allowing preliminary experiments to have a dataset of 200 images, and later experiments to have a dataset of 1000 images.</p>
+
+		<p>Later experiments were used to count the generated distribution of shape/colour, counting any shape that had a combination of both colours as whichever colour dominated most. 30 of the first pieces of test data were counted in this process in all cases. Percentage distributions of the generated data were found by averaging out the distributions in these first 30 results.</p>
+
+		<h4 class="subheading">Initial Trials</h4>
+		<p>The first four experiments were comprised of smaller datasets of 200 images. Experiments 1 and 2 focussed on determining whether the computer was able to emulate distributions of different colours, using a 50/50 and 70/30 distribution of blue and orange circles (respectively) in a set layout of two rows of 5. Both these experiments resulted in mode collapse (generating the same or similar results regardless of input), and the 70/30 also experienced an issue with not being able to fill all the circles with a single colour. These experiments were inconclusive due to these issues, and were addressed in the next set of experiments. </p>
+
+		<img class="SampleResults" src="images/Experiment1.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		50/50 distribution Experiment 1
+		</p>
+		<img class="SampleResults" src="images/Experiment2.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		70/30 distribution Experiment 2
+		</p>
+
+		<p>With experiments 3 and 4, the same distributions were used, this time with blue squares and orange circles, thereby adding in the shape variable. These tests showed that the trained model was easily able to pick up on and follow certain rules, as it did not create a cross-over of blue circles or orange squares (something that did not exist in the dataset). This was important to establish before testing how Pix2Pix would react to being trained on different distributions of all four combinations of shape and colour. If Pix2Pix was producing shape/colour combinations that did not exist in the training dataset on this level, the outcome of more advanced tests could be compromised. </p>
+
+		<img class="SampleResults" src="images/Experiment3.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		50/50 distribution Experiment 3
+		</p>
+		<img class="SampleResults" src="images/Experiment4.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		70/30 distribution Experiment 4
+		</p>
+
+		<h3 class="subheading">Refined Experiments</h3>
+		<p>In the next experiments, the mode collapse was fixed by randomising the shape placement. The 50/50 and 70/30 distributions of circles were again trained with a dataset of 200 (experiments 5 and 6). </p>
+
+		<img class="SampleResults" src="images/Experiment5.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		50/50 distribution Experiment 5
+		</p>
+		<img class="SampleResults" src="images/Experiment6.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		70/30 distribution Experiment 6
+		</p>
+
+		<p>These results still displayed circles that were filled by both colours occasionally, so the test was also carried out with a dataset of 1000 for each distribution to try improve the machine's understanding of how a shape should be coloured (Experiments 7 and 8).</p>
+
+		<img class="SampleResults" src="images/Experiment7.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		50/50 distribution Experiment 7
+		</p>
+		<img class="SampleResults" src="images/Experiment8.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		70/30 distribution Experiment 8
+		</p>
+
+		<p>While the 50/50 distribution in experiment 7 still had half-coloured circles, the 70/30 distribution in experiment 8 appeared to be consistently filling each circle with a single colour. This was considered a success. From here, the data from experiment 8’s first 30 training data and generated data were compared by histogram to evaluate how Pix2Pix interprets the dataset's bias</p>
+
+		<img class="Histograms" src="images/HistogramExperiment8IN.png">
+		<img class="Histograms" src="images/HistogramExperiment8.png">
+		<p>Top: Distribution of orange in input data for experiment 8
+		Bottom: Distribution of orange in generated data for experiment 8</p>
+
+		<p>These results had an average orange distribution of 20%, down from the training set of 30%. This shows that in this experiment, Pix2Pix was more likely to under-represent the minority group, exacerbating the bias present in the training dataset.</p>
+
+		<h4 class="subheading">Final Experiments</h4>
+
+		<p>For the next experiments, a "coin toss" method was used for the distribution of circles, to create a more life-like training dataset. Each circle had a 30% likelihood of being either blue or orange . This meant that each individual image could have varying numbers of orange and blue, but overall the average percentages across all training images should be approximately 70/30. </p>
+		
+		<img class="SampleResults" src="images/Experiment9.png">
+		<p>Sample Results: Left to right: Input, Output, Test Data
+		70/30 distribution Experiment 9
+		</p>
+
+		<p>This experiment’s first 30 training and test data distributions were also gathered and compared by histogram below:</p>
+		
+		<img class="Histograms" src="images/HistogramExperiment9IN.png">
+		<img class="Histograms" src="images/HistogramExperiment9.png">
+		<p>Top: Distribution of orange in input data for experiment 9
+		Bottom: Distribution of orange in generated data for experiment 9</p>
+
+		<p>These results had an average orange distribution of 31%, slightly up from the training distribution of 29%. This shows that in this experiment Pix2Pix seemed to somewhat replicate the bias – while the number increased by 2%, it is close enough that with this small of a sample size and only one trial, it cannot be confirmed that Pix2Pix would generally increase the minority group numbers. A counting of more than 30 training and test data in several similar trials would end up with more conclusive results.</p>
+
+		<p>As a final experiment, combinations of shape and colour were used to represent real-life datasets. In both experiments blue was used to represent male and orange to represent female. </p>
+
+		<p>In experiment 10, data was taken from the World Economic Forum’s Global Gender Gap Report 2018 [3]. In this Experiment, square indicated an Artificial Intelligence professional without machine learning skill, and circle indicated an artificial intelligence professional who did had skills in machine learning. 
+		In experiment 11, a similar approach was taken using the numbers of women and men smiling and not smiling in the celebA dataset, described in Tom White's Sampling Generative Networks (2016) [2]. </p>
+
+		<p>Both these datasets had to be significantly rounded to the nearest ten in order to be applied to a set of 10 dots, so these results are not accurate to the dataset, but future tests could be created with more than 10 shapes if these datasets needed to be represented accurately. </p>
+
+		<img class="SampleResults" src="images/Experiment10.png">
+		<p>Left to right: Input, Output, Test Data
+		Machine Learning skills, Experiment 10 </p>
+		<img class="SampleResults" src="images/Experiment11.png">
+		<p>Left to right: Input, Output, Test Data
+		Smiling/Not Smiling, Experiment 11</p>
+
+		<h4 class="subheading">Percentage distributions of generated data in experiments 10 and 11:</h4>
+
+		<p>Experiment 10 Average Distributions</p>
+
+		<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Male (Blue)</th>
+    <th class="tg-0pky">Female (Orange)</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Circle (No Machine Learning)</td>
+    <td class="tg-0pky">40%</td>
+    <td class="tg-0pky">20%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Square (Machine Learning)</td>
+    <td class="tg-0pky">30%</td>
+    <td class="tg-0pky">10%</td>
+  </tr>
+</table>
+
+<p>Experiment 10 Average Generated Distributions </p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Male (Blue)</th>
+    <th class="tg-0pky">Female (Orange)</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Circle (No Machine Learning)</td>
+    <td class="tg-0pky">36%</td>
+    <td class="tg-0pky">22.66%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Square (Machine Learning)</td>
+    <td class="tg-0pky">25.33%</td>
+    <td class="tg-0pky">16%</td>
+  </tr>
+</table>
+		<p>Experiment 11 Input Distributions </p>
+
+		<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Male (Blue)</th>
+    <th class="tg-0pky">Female (Orange)</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Circle (Smiling)</td>
+    <td class="tg-0pky">20%</td>
+    <td class="tg-0pky">30%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Square (Not Smiling)</td>
+    <td class="tg-0pky">20%</td>
+    <td class="tg-0pky">30%</td>
+  </tr>
+</table>
+
+<p>Experiment 11 Average Generated Distributions</p>
+
+		<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Male (Blue)</th>
+    <th class="tg-0pky">Female (Orange)</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Circle (Smiling)</td>
+    <td class="tg-0pky">16%</td>
+    <td class="tg-0pky">34%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Square (Not Smiling)</td>
+    <td class="tg-0pky">14.43%</td>
+    <td class="tg-0pky">35.66%</td>
+  </tr>
+</table>
+
+
+
+		<p>These results were interesting but definitely need future expansion – Experiment 10 seems to reduce the bias, however experiment 11 seems to exacarbate it. In one, the minority was orange, and in the other the minority was blue. This could indicate that somehow certain colours or shapes are likelier than others to be reduced in number, which would need further testing. However perhaps with an increased sample size of generated data being recorded, or several more attempts at mirroring the same distributions, different results may occur. </p>
+		
+		<p></p>
+		<p></p>
+
+
+		<h2>Concluding Notes</h2>
+
+		<p>Overall, this research has shown a tendency for Pix2Pix to understand and replicate certain rule patterns such as distributions of 70/30 to a general degree, however it is so far inconclusive as to whether Pix2Pix has any tendency to reduce or exacerbate biases from the training dataset. </p>
+
+		<p>Future experiments need to be done addressing the possible colour impacts (possibly by re-training the final experiments with the colours and shapes reversed) and preferably also counting a larger sample of generated and training data. </p>
+
+		
+
+	<h3>References</h3>
+	<p class="indent">[1] Isola, P., Zhu, J.-Y., Zhou, T., & Efros, A. A. (2016). Image- to-Image Translation with Conditional Adversarial Networks. ArXiv. Retrieved from http://arxiv.org/abs/1611.07004</p>
+			
+	<p class="indent">[2] White, T. (2016). Sampling Generative Networks. ArXiv. Retrieved from http://arxiv.org/abs/1609.04468</p>
+
+    <p class="indent">[3] World Economic Forum. (2018). The Global Gender Gap Index 2018. Retrieved from http://www3.weforum.org/docs/WEF_GGGR_2018.pdf</p>
+
+    <p class="indent">[4] Zhao, S., Ren, H., Yuan, A., Song, J., Goodman, N., & Ermon, S. (2018). Bias and Generalization in Deep Generative Models: An Empirical Study. ArXiv. Retrieved from http://arxiv.org/abs/1811.03259</p>
+
+    <p class="indent">[5] Zhao, J., Wang, T., Yatskar, M., Ordonez, V., & Chang, K.- W. (2017). Men Also Like Shopping: Reducing Gender Bias Amplification using Corpus-level Constraints. Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing, 2979–2989. https://doi.org/10.18653/v1/D17-1323</p>
+		
+		
+	</div>
+
+	
+</body>
+</html>
